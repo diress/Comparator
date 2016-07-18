@@ -1,23 +1,30 @@
 /**
  * Created by bvasilenko on 15.07.2016.
  */
+function changeProperties() {
+    items_properties["speed"].default = true;
+    updateTable();
+}
 
-$(document).ready(function(){
+function updateTable(doc) {
 
+    $('#comptable').remove();
+
+    $('#table_place').append('<table id="comptable"><caption>Сравнение свойств объектов</caption><tr><th colspan="2"></th></tr></table>');
     var properties = '';
     var header = '<tr><th>'+object_name+'</th>';
     for(e in items_properties) {
-        //$('#comptable').last().append("<tr><td>"+items_properties[e].title+"</td></tr>")
         if (items_properties[e].default) {
             var check = 'checked';
             header = header + '<th>' + items_properties[e].title + '</th>';
         } else {
             var check = '';
         }
-        properties = properties + '<input type="checkbox" name="checkbox_' + e + ' value="checkbox" ' +  check + '>' + items_properties[e].title;
+        properties = properties + '<input type="checkbox" name="checkbox_' + e +
+            ' value="checkbox" ' +  check + ' onClick="changeProperties()">' + items_properties[e].title;
     }
     header = header + '</tr>';
-    $(this).find("th:first").html(properties);
+    $(doc).find("th:first").html(properties);
     $('#comptable').last().append(header)
 
     for (i = 0; i < items.length; i++) {
@@ -32,4 +39,10 @@ $(document).ready(function(){
         rowdata = rowdata + "</tr>"
         $('#comptable').last().append(rowdata)
     }
+
+}
+
+$(document).ready(function(){
+
+    updateTable(this);
 });
