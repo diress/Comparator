@@ -4,11 +4,12 @@
 
 $(document).ready(function(){
 
-    $('#comptable tr').each(function() {
-        $(this).find("td:first").html("123"); //не работает!
-    });
-    // for(e in items) {
-    //
-    // }
+
+    // $('#comptable tr').each(function() {
+    //     $(this).find("td:first").html("123");
+    // });
+    for(e in items_properties) {
+        $('#comptable').last().append("<tr><td>"+items_properties[e].title+"</td></tr>")
+    }
 
 });
